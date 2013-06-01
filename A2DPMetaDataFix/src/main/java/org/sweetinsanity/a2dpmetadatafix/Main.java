@@ -19,11 +19,6 @@ public class Main implements IXposedHookLoadPackage {
         if (lpparam.packageName.equals("com.spotify.mobile.android.ui")) {
             findAndHookMethod("com.spotify.mobile.android.ui.widget.SpotifyWidget", lpparam.classLoader, "onReceive", Context.class, Intent.class, new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-                }
-
-                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Context context = (Context) param.args[0];
                     Intent intent = (Intent) param.args[1];
@@ -39,15 +34,10 @@ public class Main implements IXposedHookLoadPackage {
         } else {
             findAndHookMethod("tunein.library.common.k", lpparam.classLoader, "c", new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
-                }
-
-                @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    String track = (String)param.thisObject.getClass().getDeclaredField("j").get(param.thisObject);
+                    String track  = (String)param.thisObject.getClass().getDeclaredField("j").get(param.thisObject);
                     String artist = (String)param.thisObject.getClass().getDeclaredField("k").get(param.thisObject);
-                    String album = (String)param.thisObject.getClass().getDeclaredField("g").get(param.thisObject);
+                    String album  = (String)param.thisObject.getClass().getDeclaredField("g").get(param.thisObject);
 
                     Application tunein = (Application)param.thisObject.getClass().getDeclaredField("b").get(param.thisObject);
 
